@@ -19,6 +19,7 @@ function doLookup(entities, options, cb) {
 
   Logger.trace({ entities }, "entities");
 
+  // builds our list of tasks
   entities.forEach(entity => {
     if (entity.value) {
       const requestOptions = {
@@ -31,8 +32,11 @@ function doLookup(entities, options, cb) {
       Logger.debug({ uri: requestOptions.uri }, "Request URI");
 
       tasks.push(function (done) {
+        // callback function for each request
         requestDefault(requestOptions, function (error, res, body) {
+          // below runs when we get a response
           if (error) {
+            // return error and value if there was an error
             done({
               error: error,
               entity: entity.value,
@@ -40,12 +44,11 @@ function doLookup(entities, options, cb) {
             });
             return;
           }
-
           let result = {};
           if (res.statusCode === 200) {
             result = {
-              entity,
-              body
+              entity,  // entity + metadata 
+              body  // response body
             };
           } else if (res.statusCode === 429) {
             // reached rate limit
@@ -68,58 +71,37 @@ function doLookup(entities, options, cb) {
     }
   });
 
+  // this executes tasks asynchronously with a limit and a callback
   async.parallelLimit(tasks, 10, (err, results) => {
     if (err) {
       cb(err);
       return;
     }
 
+    // Here is where data formatting can be done
     results.forEach(result => {
       Logger.trace({ result }, "Checking data to see if blocking");
-
-      const { body: { data: { translations } } } = result;
 
       if (result.body === null || _isMiss(result.body)) {
         lookupResults.push({
           entity: result.entity,
           data: null
         });
-      } else if (translations) {
-        translations.forEach(({ translatedText, detectedSourceLanguage }) => {
-          Logger.trace({ result: detectedSourceLanguage }, "Checking if this works");
-          if (detectedSourceLanguage === "en") {
-            lookupResults.push({
-              entity: result.entity,
-              data: null
-            });
-          } else {
-            const sourceLanguage = getSourceLanguage(detectedSourceLanguage);
-
-            const details = {
-              ...result.body,
-              data: {
-                ...result.body.data,
-                translations: [{
-                  translatedText,
-                  detectedSourceLanguage: sourceLanguage
-                }]
-              }
-            };
-
-            lookupResults.push({
-              entity: result.entity,
-              data: {
+      } else{
+        // absolutely required for this to be returned - this is the important chunk
+        lookupResults.push({
+            entity: result.entity,
+            data: {
                 summary: [],
                 details
-              }
-            });
-          }
-        })
+            }
+        });
       }
     });
 
     Logger.trace({ lookupResults }, "Lookup Results");
 
+    // end-level callback
     cb(null, lookupResults);
   });
 }
