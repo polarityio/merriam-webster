@@ -1,4 +1,5 @@
 module.exports = {
+  
     /**
      * Name of the integration which is displayed in the Polarity integrations user interface
      *
@@ -29,6 +30,14 @@ module.exports = {
         regex: '([A-Za-z]\w+)'
       }
     ],
+    request: {
+      cert: '',
+      key: '',
+      passphrase: '',
+      ca: '',
+      proxy: '',
+      rejectUnauthorized: true
+    },
     /**
      * An array of style files (css or less) that will be included for your integration. Any styles specified in
      * the below files can be used in your custom template.
@@ -62,7 +71,7 @@ module.exports = {
       }
     },
     logging: {
-      level: 'info' //trace, debug, info, warn, error, fatal
+      level: 'trace' //info, trace, debug, info, warn, error, fatal
     },
     /**
      * Options that are displayed to the user/admin in the Polarity integration user-interface.  Should be structured
@@ -73,74 +82,10 @@ module.exports = {
      */
     options: [
       {
-        key: 'fontFamily',
-        name: 'Font Family',
-        description: 'Display the selected text using the chosen font',
-        default: {
-          value: 'helvetica',
-          display: 'Helvetica'
-        },
-        type: 'select',
-        options: [
-          {
-            value: 'helvetica',
-            display: 'Helvetica'
-          },
-          {
-            value: 'courier',
-            display: 'Courier'
-          },
-          {
-            value: 'arial',
-            display: 'Arial'
-          },
-          {
-            value: 'verdana',
-            display: 'Verdana'
-          }
-        ],
-        multiple: false,
-        userCanEdit: true,
-        adminOnly: false
-      },
-      {
-        key: 'fontSize',
-        name: 'Font Size',
-        description: 'Display the selected text using the chosen font size',
-        default: {
-          value: 'size-12px',
-          display: '12px'
-        },
-        type: 'select',
-        options: [
-          {
-            value: 'size-10px',
-            display: '10px'
-          },
-          {
-            value: 'size-12px',
-            display: '12px'
-          },
-          {
-            value: 'size-14px',
-            display: '14px'
-          },
-          {
-            value: 'size-16px',
-            display: '16px'
-          }
-        ],
-        multiple: false,
-        userCanEdit: true,
-        adminOnly: false
-      },
-      {
-        key: 'preserveWhitespace',
-        name: 'Preserve Whitespace',
-        description:
-          'If checked, the integration will preserve the whitespace of the selected text when displaying it in the Overlay Window',
-        default: true,
-        type: 'boolean',
+        key: 'apiKey',
+        name: "API Key",
+        description: "The API key need to access the Merriam-Webster API",
+        type: 'password',
         userCanEdit: true,
         adminOnly: false
       }
