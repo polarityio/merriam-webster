@@ -93,7 +93,7 @@ function doLookup(entities, options, cb) {
             entity: result.entity,
             data: {
                 summary: [],
-                details
+                details: result.body
             }
         });
       }

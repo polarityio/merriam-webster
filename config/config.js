@@ -27,7 +27,7 @@ module.exports = {
     customTypes: [
       {
         key: 'word',
-        regex: '([A-Za-z]\w+)'
+        regex: /([A-Za-z]\w+)/
       }
     ],
     request: {
@@ -85,6 +85,7 @@ module.exports = {
         key: 'apiKey',
         name: "API Key",
         description: "The API key need to access the Merriam-Webster API",
+        default: "",
         type: 'password',
         userCanEdit: true,
         adminOnly: false
