@@ -1,0 +1,10 @@
+{
+  "main": "./integration.js",
+  "name": "Merriam-Webster",
+  "version": "1.0.0-beta",
+  "private": true,
+  "dependencies": {
+    "request": "^2.88",
+    "async": "^2.6"
+  }
+}
