@@ -21,3 +21,4 @@ ENHANCEMENTS
 - Sound-clip if available
 - Multiple definitions
 - Date
+- Syllables ('hwi.hw')

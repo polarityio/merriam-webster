@@ -95,8 +95,7 @@ function doLookup(entities, options, cb) {
           if (idWord === result.entity.value) {
             exactMatches.push({
                 type: match.fl,
-                def: match.shortdef,
-                syllables: match.hwi.hw
+                defs: match.shortdef
             });
           }
         });

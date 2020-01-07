@@ -1,6 +1,14 @@
 <div>
-    <span class="integration-text-bold-color">{{block.entity.value}}</span>
-    <div>
-        {{details}}
-    </div>>
-</div>>
+    <a class="p-link" href="https://www.merriam-webster.com/dictionary/{{block.entity.value}}">View in Merriam-Webster</a>
+    <br><br>
+    {{#each details as |detail|}}
+        <p><b>Usage: </b>{{detail.type}}</p>
+        <p><b>Definitions:</b></p>
+        <ol>
+            {{#each detail.defs as |def|}}
+                <li>{{def}}</li>
+            {{/each}}
+        </ol>
+        <br>
+    {{/each}}
+</div>
