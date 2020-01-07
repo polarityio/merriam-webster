@@ -91,8 +91,8 @@ function doLookup(entities, options, cb) {
         // absolutely required for this to be returned - this is the important chunk
         let exactMatches = []
         result.body.forEach(match => {
-          let idWord = match.meta.id.split(":")[0]
-          if (idWord === result.entity.value) {
+          let idWord = match.meta.id.split(":")[0].toLowerCase()
+          if (idWord === result.entity.value.toLowerCase()) {
             exactMatches.push({
                 type: match.fl,
                 defs: match.shortdef
