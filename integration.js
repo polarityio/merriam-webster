@@ -89,11 +89,22 @@ function doLookup(entities, options, cb) {
         });
       } else{
         // absolutely required for this to be returned - this is the important chunk
+        let exactMatches = []
+        result.body.forEach(match => {
+          let idWord = match.meta.id.split(":")[0]
+          if (idWord === result.entity.value) {
+            exactMatches.push({
+                type: match.fl,
+                def: match.shortdef,
+                syllables: match.hwi.hw
+            });
+          }
+        });
         lookupResults.push({
             entity: result.entity,
             data: {
-                summary: [],
-                details: result.body
+                summary: exactMatches.length,
+                details: exactMatches
             }
         });
       }
