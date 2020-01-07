@@ -1,11 +1,16 @@
-# merriam-webster
+Merriam-Webster Integration
+============================
+Used to look up words from the online Merriam-Webster Collegiate dictionary.
 
-Currently a work in progress
+TODO
+====
+- Finish this README
 
 ENHANCEMENTS
 ============
 - Pronounciations
 - Sound-clip if available
-- Multiple definitions
 - Date
+- Etymology
+- Example
 - Syllables ('hwi.hw')
