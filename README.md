@@ -2,10 +2,6 @@
 
 Currently a work in progress
 
-V1 TODO
-========
-- Handle misspelled words - right now it's crashing the integration.
-
 ENHANCEMENTS
 ============
 - Pronounciations

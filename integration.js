@@ -119,7 +119,8 @@ function doLookup(entities, options, cb) {
 function _isMiss(body) {
   return body &&
     Array.isArray(body) &&
-    body.length === 0;
+    (body.length === 0 ||
+     !body[0].hasOwnProperty("meta"));
 }
 
 /**
