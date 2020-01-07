@@ -89,11 +89,21 @@ function doLookup(entities, options, cb) {
         });
       } else{
         // absolutely required for this to be returned - this is the important chunk
+        let exactMatches = []
+        result.body.forEach(match => {
+          let idWord = match.meta.id.split(":")[0].toLowerCase()
+          if (idWord === result.entity.value.toLowerCase()) {
+            exactMatches.push({
+                type: match.fl,
+                defs: match.shortdef
+            });
+          }
+        });
         lookupResults.push({
             entity: result.entity,
             data: {
-                summary: [],
-                details: result.body
+                summary: [exactMatches.length],
+                details: exactMatches
             }
         });
       }
@@ -109,7 +119,8 @@ function doLookup(entities, options, cb) {
 function _isMiss(body) {
   return body &&
     Array.isArray(body) &&
-    body.length === 0;
+    (body.length === 0 ||
+     !body[0].hasOwnProperty("meta"));
 }
 
 /**
