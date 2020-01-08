@@ -34,9 +34,7 @@ function doLookup(entities, options, cb) {
       tasks.push(function (done) {
         // callback function for each request
         requestDefault(requestOptions, function (error, res, body) {
-          // below runs when we get a response
           if (error) {
-            // return error and value if there was an error
             done({
               error: error,
               entity: entity.value,
@@ -77,8 +75,6 @@ function doLookup(entities, options, cb) {
       cb(err);
       return;
     }
-
-    // Here is where data formatting can be done
     results.forEach(result => {
       Logger.trace({ result }, "Checking data to see if blocking");
 
@@ -88,7 +84,6 @@ function doLookup(entities, options, cb) {
           data: null
         });
       } else{
-        // absolutely required for this to be returned - this is the important chunk
         let exactMatches = []
         result.body.forEach(match => {
           let idWord = match.meta.id.split(":")[0].toLowerCase()
