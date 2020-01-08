@@ -2,6 +2,7 @@
 
 const request = require("request");
 const config = require("./config/config");
+const _ = require("lodash");
 const async = require("async");
 const fs = require("fs");
 let Logger;
@@ -16,11 +17,17 @@ let requestDefault;
 function doLookup(entities, options, cb) {
   let lookupResults = [];
   let tasks = [];
-
+  let uniqueEntities = [];
   Logger.trace({ entities }, "entities");
 
+  // filter down to only entities with unique lowercase values
+  uniqueEntities = _.chain(entities).map(entity => {
+    return {...entity, "value": entity.value.toLowerCase()}
+  }).uniqBy("value").value();
+  
+  Logger.trace({ uniqueEntities }, "uniqueEntities");
   // builds our list of tasks
-  entities.forEach(entity => {
+  uniqueEntities.forEach(entity => {
     if (entity.value) {
       const requestOptions = {
         method: "GET",
@@ -87,7 +94,7 @@ function doLookup(entities, options, cb) {
         let exactMatches = []
         result.body.forEach(match => {
           let idWord = match.meta.id.split(":")[0].toLowerCase()
-          if (idWord === result.entity.value.toLowerCase()) {
+          if (idWord === result.entity.value) {
             exactMatches.push({
                 type: match.fl,
                 defs: match.shortdef
