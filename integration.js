@@ -21,9 +21,9 @@ function doLookup(entities, options, cb) {
   Logger.trace({ entities }, "entities");
 
   // filter down to only entities with unique lowercase values
-  uniqueEntities = _.chain(entities).map(entity => {
-    return {...entity, "value": entity.value.toLowerCase()}
-  }).uniqBy("value").value();
+  uniqueEntities = _.chain(entities).map(entity => (
+    {...entity, "value": entity.value.toLowerCase()}
+    )).uniqBy("value").value();
   
   Logger.trace({ uniqueEntities }, "uniqueEntities");
   // builds our list of tasks
