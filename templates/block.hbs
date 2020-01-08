@@ -2,6 +2,7 @@
     <a class="p-link" href="https://www.merriam-webster.com/dictionary/{{block.entity.value}}">View in Merriam-Webster</a>
     <br><br>
     {{#each details as |detail|}}
+        <p><b>Entry: </b>{{detail.hw}}</p>
         <p><b>Usage: </b>{{detail.type}}</p>
         <p><b>Definitions:</b></p>
         <ol>

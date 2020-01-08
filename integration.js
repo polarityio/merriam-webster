@@ -93,11 +93,11 @@ function doLookup(entities, options, cb) {
       } else{
         let exactMatches = []
         result.body.forEach(match => {
-          let idWord = match.meta.id.split(":")[0].toLowerCase()
-          if (idWord === result.entity.value) {
+          if (match.meta.stems.includes(result.entity.value.toLowerCase())) {
             exactMatches.push({
                 type: match.fl,
-                defs: match.shortdef
+                defs: match.shortdef,
+                hw: match.hwi.hw
             });
           }
         });
