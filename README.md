@@ -1,23 +1,25 @@
-# merriam-webster
+# Polarity Merriam-Webster Integration
 
-Currently a work in progress
+![mode:on demand only](https://img.shields.io/badge/mode-on%20demand%20only-blue.svg)
 
-V1 TODO
-========
-- Filter response body to only objects where "meta.id" contains our word with no spaces
-  - Possible to have "polarity:1" and "polarity:2" (homographs) <-- we want these
-  - Also possible to have "polarity therapy" (related words) <-- we don't want these
-- Populate summary card with number of occurances
-- For each homograph, populate the details card with
-  - Word (entity.value)
-  - Type ('fl')
-  - Definition ('shortdef')
-  - syllables ('hwi.hw')
-  - Link to Merriam-Webster
+The Polarity Merriam-Webster integration is an on-demand integration which searches for individual words in the Merriam-Webster collegiate dictionary. This gives you access to definitions for any word right at your fingertips as you work.
 
-ENHANCEMENTS
-============
-- Pronounciations
-- Sound-clip if available
-- Multiple definitions
-- Date
+> This integration should only be run on in on-demand mode since recognition will cause it to search for every word on screen.
+
+![image](images/overlay.png)
+
+## Merriam-Webster Integration Options
+
+### API Key
+
+The Merriam-Webster dictionary API key used to access the API.
+
+## Installation Instructions
+
+Installation instructions for integrations are provided on the [PolarityIO GitHub Page](https://polarityio.github.io/).
+
+## Polarity
+
+Polarity is a memory-augmentation platform that improves and accelerates analyst decision making.  For more information about the Polarity platform please see:
+
+https://polarity.io/

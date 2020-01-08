@@ -2,6 +2,7 @@
 
 const request = require("request");
 const config = require("./config/config");
+const _ = require("lodash");
 const async = require("async");
 const fs = require("fs");
 let Logger;
@@ -16,11 +17,17 @@ let requestDefault;
 function doLookup(entities, options, cb) {
   let lookupResults = [];
   let tasks = [];
-
+  let uniqueEntities = [];
   Logger.trace({ entities }, "entities");
 
+  // filter down to only entities with unique lowercase values
+  uniqueEntities = _.chain(entities).map(entity => (
+    {...entity, "value": entity.value.toLowerCase()}
+    )).uniqBy("value").value();
+  
+  Logger.trace({ uniqueEntities }, "uniqueEntities");
   // builds our list of tasks
-  entities.forEach(entity => {
+  uniqueEntities.forEach(entity => {
     if (entity.value) {
       const requestOptions = {
         method: "GET",
@@ -34,9 +41,7 @@ function doLookup(entities, options, cb) {
       tasks.push(function (done) {
         // callback function for each request
         requestDefault(requestOptions, function (error, res, body) {
-          // below runs when we get a response
           if (error) {
-            // return error and value if there was an error
             done({
               error: error,
               entity: entity.value,
@@ -77,8 +82,6 @@ function doLookup(entities, options, cb) {
       cb(err);
       return;
     }
-
-    // Here is where data formatting can be done
     results.forEach(result => {
       Logger.trace({ result }, "Checking data to see if blocking");
 
@@ -88,12 +91,21 @@ function doLookup(entities, options, cb) {
           data: null
         });
       } else{
-        // absolutely required for this to be returned - this is the important chunk
+        let exactMatches = []
+        result.body.forEach(match => {
+          let idWord = match.meta.id.split(":")[0].toLowerCase()
+          if (idWord === result.entity.value) {
+            exactMatches.push({
+                type: match.fl,
+                defs: match.shortdef
+            });
+          }
+        });
         lookupResults.push({
             entity: result.entity,
             data: {
-                summary: [],
-                details: result.body
+                summary: [exactMatches.length],
+                details: exactMatches
             }
         });
       }
@@ -109,7 +121,8 @@ function doLookup(entities, options, cb) {
 function _isMiss(body) {
   return body &&
     Array.isArray(body) &&
-    body.length === 0;
+    (body.length === 0 ||
+     !body[0].hasOwnProperty("meta"));
 }
 
 /**
