@@ -1,13 +1,13 @@
 <div>
-    <a class="p-link" href="https://www.merriam-webster.com/dictionary/{{block.entity.value}}">View in Merriam-Webster</a>
+    <a class="p-link" href="https://www.merriam-webster.com/dictionary/{{block.entity.value}}">View in Merriam-Webster {{fa-icon "external-link-square" fixedWidth=true class="external-link"}}</a>
     <br><br>
     {{#each details as |detail|}}
-        <p><b>Entry: </b>{{detail.hw}}</p>
-        <p><b>Usage: </b>{{detail.type}}</p>
-        <p><b>Definitions:</b></p>
+        <p>Entry: <b>{{detail.hw}}</b></p>
+        <p>Usage: <b>{{detail.type}}</b></p>
+        <p>Definitions:</p>
         <ol>
             {{#each detail.defs as |def|}}
-                <li>{{def}}</li>
+                <li><b>{{def}}</b></li>
             {{/each}}
         </ol>
         <br>
