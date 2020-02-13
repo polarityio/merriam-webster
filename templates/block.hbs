@@ -3,13 +3,17 @@
     <br><br>
     {{#each details as |detail|}}
         <p>Entry: <b>{{detail.hw}}</b></p>
-        <p>Usage: <b>{{detail.type}}</b></p>
-        <p>Definitions:</p>
-        <ol>
-            {{#each detail.defs as |def|}}
-                <li><b>{{def}}</b></li>
-            {{/each}}
-        </ol>
+        {{#if detail.type}}
+            <p>Usage: <b>{{detail.type}}</b></p>
+        {{/if}}
+        {{#if detail.defs}}
+            <p>Definitions:</p>
+            <ol>
+                {{#each detail.defs as |def|}}
+                    <li><b>{{def}}</b></li>
+                {{/each}}
+            </ol>
+        {{/if}}
         <br>
     {{/each}}
 </div>
