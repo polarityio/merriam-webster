@@ -74,6 +74,13 @@ module.exports = {
       level: 'info' //trace, info, debug, info, warn, error, fatal
     },
     /**
+     * Setting to restrict the integration to On-Demand searches only
+     * 
+     * @type Boolean
+     * @optional
+     */
+    onDemandOnly: true,
+    /**
      * Options that are displayed to the user/admin in the Polarity integration user-interface.  Should be structured
      * as an array of option objects.
      *

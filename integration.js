@@ -93,7 +93,8 @@ function doLookup(entities, options, cb) {
       } else{
         let exactMatches = []
         result.body.forEach(match => {
-          if (match.meta.stems.includes(result.entity.value.toLowerCase())) {
+          let lowerStems = match.meta.stems.map(stem => stem.toLowerCase());
+          if (lowerStems.includes(result.entity.value)) {
             exactMatches.push({
                 type: match.fl,
                 defs: match.shortdef,
