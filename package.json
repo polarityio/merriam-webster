@@ -6,6 +6,6 @@
   "dependencies": {
     "request": "^2.88",
     "async": "^2.6",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.19"
   }
 }
