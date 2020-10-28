@@ -1,11 +1,11 @@
 {
   "main": "./integration.js",
   "name": "Merriam-Webster",
-  "version": "3.0.0",
+  "version": "3.0.1-beta",
   "private": true,
   "dependencies": {
-    "request": "^2.88",
     "async": "^2.6",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.20",
+    "request": "^2.88"
   }
 }
