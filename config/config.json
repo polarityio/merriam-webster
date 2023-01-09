@@ -1,0 +1,54 @@
+{
+  "name": "Merriam-Webster",
+  "acronym": "DICT",
+  "description": "Searches the Merriam-Webster Collegiate dictionary for the entity",
+  "customTypes": [
+    {
+      "key": "word",
+      "regex": "([A-Za-z]\\w+)"
+    }
+  ],
+  "request": {
+    "cert": "",
+    "key": "",
+    "passphrase": "",
+    "ca": "",
+    "proxy": "",
+    "rejectUnauthorized": true
+  },
+  "styles": [
+    "./styles/style.less"
+  ],
+  "block": {
+    "component": {
+      "file": "./components/block.js"
+    },
+    "template": {
+      "file": "./templates/block.hbs"
+    }
+  },
+  "summary": {
+    "component": {
+      "file": "./components/summary.js"
+    },
+    "template": {
+      "file": "./templates/summary.hbs"
+    }
+  },
+  "logging": {
+    "level": "info"
+  },
+  "onDemandOnly": true,
+  "options": [
+    {
+      "key": "apiKey",
+      "name": "API Key",
+      "description": "The API key need to access the Merriam-Webster API",
+      "default": "",
+      "type": "password",
+      "userCanEdit": true,
+      "adminOnly": false
+    }
+  ],
+  "entityTypes": []
+}
