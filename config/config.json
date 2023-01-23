@@ -8,6 +8,7 @@
       "regex": "([A-Za-z]\\w+)"
     }
   ],
+  "defaultColor": "light-gray",
   "request": {
     "cert": "",
     "key": "",
@@ -16,9 +17,7 @@
     "proxy": "",
     "rejectUnauthorized": true
   },
-  "styles": [
-    "./styles/style.less"
-  ],
+  "styles": ["./styles/style.less"],
   "block": {
     "component": {
       "file": "./components/block.js"
