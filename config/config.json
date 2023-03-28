@@ -1,4 +1,5 @@
 {
+  "polarityIntegrationUuid": "d537b860-cce1-11ed-aeee-075d3490155d",
   "name": "Merriam-Webster",
   "acronym": "DICT",
   "description": "Searches the Merriam-Webster Collegiate dictionary for the entity",
